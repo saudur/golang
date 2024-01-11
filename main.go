@@ -19,7 +19,7 @@ func main() {
 	r.POST("/daftar", userController.Create)
 	r.PUT("/update/:id", userController.Update)
 	r.DELETE("/hapus/:id", userController.Delete)
-	r.Run()
+	r.Run(":3000")
 }
 
 // func loadEnv() {

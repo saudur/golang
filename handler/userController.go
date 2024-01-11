@@ -1,7 +1,7 @@
 package userController
 
 import (
-	"encoding/json"
+	"fmt"
 	"net/http"
 	"sekolah/config"
 	"sekolah/models"
@@ -51,17 +51,18 @@ func Update(c *gin.Context) {
 func Delete(c *gin.Context) {
 
 	var coba models.User
+	id := c.Param("id")
+	fmt.Println(id)
+	// var input struct {
+	// 	Id json.Number
+	// }
 
-	var input struct {
-		Id json.Number
-	}
+	// if err := c.ShouldBindJSON(&coba); err != nil {
+	// 	c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"message": err.Error()})
+	// 	return
+	// }
 
-	if err := c.ShouldBindJSON(&input); err != nil {
-		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"message": err.Error()})
-		return
-	}
-
-	id, _ := input.Id.Int64()
+	// id, _ := input.Id.Int64()
 	if config.DB.Delete(&coba, id).RowsAffected == 0 {
 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"message": "Tidak dapat menghapus product"})
 		return
